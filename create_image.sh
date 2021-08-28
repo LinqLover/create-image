@@ -9,6 +9,11 @@ if [[ "$POSTPARE_SCRIPT" ]]; then
     postpareScript="$(realpath "$POSTPARE_SCRIPT")"
 fi
 
+fileinScript="$(realpath "prepareImage.st")"
+script_dir="$(realpath "$(dirname "$0")")"
+cd "$script_dir"
+mkdir output && cd output
+
 # Download and extract latest Trunk release
 files_server="http://files.squeak.org/trunk"
 files_index="files.html"
@@ -19,11 +24,9 @@ wget "$files_server/$build/$buildAio"
 unzip \
     -d allInOne/ "$buildAio" \
     -x '*.mo'  # skip superfluous localization files (optimization)
-echo ::set-output name=bundle-path::"$buildAio"
+echo ::set-output name=bundle-path::"$(realpath "$buildAio")"
 
 # Prepare VM execution
-export script_dir
-script_dir="$(realpath "$(dirname "$0")")"
 cd allInOne
 # Make squeak.sh capable of passing arguments to the image
 # HACK: Modify squeak.sh because arguments are currently not available for the All-in-One bundles
@@ -36,7 +39,7 @@ if [[ "$CI" == true ]]; then
 fi
 
 # Prepare image
-./squeak.sh "$script_dir/prepareImage.st" "$prepareScript" "$postpareScript"
+./squeak.sh "$fileinScript" "$prepareScript" "$postpareScript"
 
 # Clean up caches
 shopt -s globstar
