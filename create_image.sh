@@ -48,5 +48,5 @@ rm -rf ./**/{{package,github}-cache/,\#tmp\#*}
 # Write changes back to zip
 zip \
     -u -r \
-    -x squeak.sh \  # See HACK above
-    "../$buildAio" .
+    "../$buildAio" . \
+    -x squeak.sh  # See HACK above
