@@ -1,7 +1,4 @@
-| prepareScriptPath postpareScriptPath postpareScriptPath |
-prepareScriptPath := Smalltalk commandLine arguments first.
-postpareScriptPath := Smalltalk commandLine arguments second.
-
+| prepareScriptPath postpareScriptPath |
 [
 	"Debugging convenience & fail-safety"
 	FileStream startUp: true. "Reload stdio file handles"
@@ -18,7 +15,10 @@ postpareScriptPath := Smalltalk commandLine arguments second.
 		insertSender: (Context contextOn: ProgressNotification do: [:ex |
 			Transcript showln: ('[Progress] {1}' format: {({ex messageText. ex extraParam}) joinSeparatedBy: $|}).
 			ex resume]).
-
+	
+	prepareScriptPath := Smalltalk commandLine arguments first.
+	postpareScriptPath := Smalltalk commandLine arguments second.
+	
     prepareScriptPath ifNotEmpty: [
 		FileStream readOnlyFileNamed: prepareScriptPath do: [:stream | stream fileIn]].
 ] value.
