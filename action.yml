@@ -1,5 +1,5 @@
 name: "Create Squeak Image"
-description: "Create and prepare a customized all-in-one bundle for the latest Trunk version of Squeak"
+description: "Create and prepare a customized all-in-one image for the latest Trunk version of Squeak"
 inputs:
   prepare-script:
     description: "Path to `.st` file that will be executed before saving the image"
@@ -12,7 +12,7 @@ branding:
   color: white
 
 outputs:
-  bundle:
+  bundle-path:
     description: "Path to created image bundle"
     value: ${{ steps.createImage.outputs.bundle-path }}
 runs:
