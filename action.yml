@@ -1,0 +1,28 @@
+name: "Create Image"
+description: "Create and prepare a Squeak image"
+inputs:
+  prepare-script:
+    description: "Path to `.st` file that will be executed before saving the image"
+    required: false
+  postpare-script:
+    description: "Path to `.st` file that will be executed when the image is opened again"
+    required: false
+
+outputs:
+  bundle:
+    description: "Path to created image bundle"
+    value: ${{ steps.createImage.outputs.bundle-path }}
+runs:
+  using: 'composite'
+  steps:
+  - uses: actions/checkout@v2
+  - id: smalltalkci
+    uses: hpi-swa/setup-smalltalkCI@v1
+    with:
+      smalltalk-image: Squeak64-Trunk
+  - id: createImage
+    run: ./create_image.sh
+    shell: bash
+    env:
+      PREPARE_SCRIPT: ${{ inputs.prepare-script }}
+      POSTPARE_SCRIPT: ${{ inputs.postpare-script }}
