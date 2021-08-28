@@ -21,7 +21,7 @@ runs:
     with:
       smalltalk-image: Squeak64-Trunk
   - id: createImage
-    run: ./create_image.sh
+    run: ${{ github.action_path }}./create_image.sh
     shell: bash
     env:
       PREPARE_SCRIPT: ${{ inputs.prepare-script }}
