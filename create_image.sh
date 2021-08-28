@@ -9,9 +9,9 @@ if [[ "$POSTPARE_SCRIPT" ]]; then
     postpareScript="$(realpath "$POSTPARE_SCRIPT")"
 fi
 
-fileinScript="$(realpath "prepareImage.st")"
 script_dir="$(realpath "$(dirname "$0")")"
 cd "$script_dir"
+fileinScript="$(realpath "prepareImage.st")"
 mkdir output && cd output
 
 # Download and extract latest Trunk release
