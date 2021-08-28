@@ -1,5 +1,5 @@
-name: "Create Image"
-description: "Create and prepare a Squeak image"
+name: "Create Squeak Image"
+description: "Create and prepare a customized all-in-one bundle for the latest Trunk version of Squeak"
 inputs:
   prepare-script:
     description: "Path to `.st` file that will be executed before saving the image"
@@ -7,6 +7,9 @@ inputs:
   postpare-script:
     description: "Path to `.st` file that will be executed when the image is opened again"
     required: false
+branding:
+  icon: box
+  color: white
 
 outputs:
   bundle:
