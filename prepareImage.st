@@ -19,7 +19,8 @@
 	prepareScriptPath := Smalltalk commandLine arguments first.
 	postpareScriptPath := Smalltalk commandLine arguments second.
 	
-    prepareScriptPath ifNotEmpty: [
+	prepareScriptPath ifNotEmpty: [
+		FileDirectory setDefaultDirectory: (FileDirectory dirPathFor: prepareScriptPath).
 		FileStream readOnlyFileNamed: prepareScriptPath do: [:stream | stream fileIn]].
 ] value.
 
