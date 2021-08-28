@@ -2,8 +2,12 @@
 set -e
 
 # Read & validate inputs
-prepareScript="$([[ "$PREPARE_SCRIPT" ]] && realpath "$PREPARE_SCRIPT")"
-postpareScript="$([[ "$POSTPARE_SCRIPT" ]] && realpath "$POSTPARE_SCRIPT")"
+if [[ "$PREPARE_SCRIPT" ]]; then
+    prepareScript="$(realpath "$PREPARE_SCRIPT")"
+fi
+if [[ "$POSTPARE_SCRIPT" ]]; then
+    postpareScript="$(realpath "$POSTPARE_SCRIPT")"
+fi
 
 # Download and extract latest Trunk release
 files_server="http://files.squeak.org/trunk"
