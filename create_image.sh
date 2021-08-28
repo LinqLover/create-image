@@ -18,7 +18,9 @@ unzip \
 echo ::set-output name=bundle-path::"$buildAio"
 
 # Prepare VM execution
-cd allInOne || exit 1
+export script_dir
+script_dir="$(realpath "$(dirname "$0")")"
+cd allInOne
 # Make squeak.sh capable of passing arguments to the image
 # HACK: Modify squeak.sh because arguments are currently not available for the All-in-One bundles
 # See: https://github.com/squeak-smalltalk/squeak-app/pull/17#issuecomment-876753284
@@ -30,7 +32,7 @@ if [[ "$CI" == true ]]; then
 fi
 
 # Prepare image
-./squeak.sh "$prepareScript" "$postpareScript"
+./squeak.sh "$script_dir/prepareImage.st" "$prepareScript" "$postpareScript"
 
 # Clean up caches
 shopt -s globstar
