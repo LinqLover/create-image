@@ -1,4 +1,4 @@
-| prepareScriptPath postpareScriptPath |
+| prepareScriptPath postpareScriptPath postpareScript |
 [
 	"Debugging convenience & fail-safety"
 	FileStream startUp: true. "Reload stdio file handles"
@@ -19,13 +19,13 @@
 	prepareScriptPath := Smalltalk commandLine arguments first.
 	postpareScriptPath := Smalltalk commandLine arguments second.
 	
+	postpareScript := postpareScriptPath ifNotEmpty: [
+		FileStream readOnlyFileNamed: postpareScriptPath do: [:stream | stream contents]].
+	
 	prepareScriptPath ifNotEmpty: [
 		FileDirectory setDefaultDirectory: (FileDirectory dirPathFor: prepareScriptPath).
 		FileStream readOnlyFileNamed: prepareScriptPath do: [:stream | stream fileIn]].
 ] value.
-
-postpareScript := postpareScriptPath ifNotEmpty: [
-	FileStream readOnlyFileNamed: postpareScriptPath do: [:stream | stream contents]].
 
 Smalltalk snapshot: true andQuitWithExitCode: 0.
 
