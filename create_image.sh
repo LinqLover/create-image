@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+# Read & validate inputs
+prepareScript="$([[ "$PREPARE_SCRIPT" ]] && realpath "$PREPARE_SCRIPT")"
+postpareScript="$([[ "$POSTPARE_SCRIPT" ]] && realpath "$POSTPARE_SCRIPT")"
+
 # Download and extract latest Trunk release
 files_server="http://files.squeak.org/trunk"
 files_index="files.html"
@@ -26,7 +30,7 @@ if [[ "$CI" == true ]]; then
 fi
 
 # Prepare image
-./squeak.sh "$(realpath "prepareImage.st")" "$(realpath "$PREPARE_SCRIPT")"
+./squeak.sh "$prepareScript" "$postpareScript"
 
 # Clean up caches
 shopt -s globstar
