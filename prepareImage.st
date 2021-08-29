@@ -23,8 +23,9 @@
 		FileStream readOnlyFileNamed: postpareScriptPath do: [:stream | stream contents]].
 	
 	prepareScriptPath ifNotEmpty: [
-		FileDirectory setDefaultDirectory: (FileDirectory dirPathFor: prepareScriptPath).
-		FileStream readOnlyFileNamed: prepareScriptPath do: [:stream | stream fileIn]].
+		Smalltalk globals at: #CIPrepareImageDirectory put: (FileDirectory forFileName: prepareScriptPath).
+		FileStream readOnlyFileNamed: prepareScriptPath do: [:stream | stream fileIn].
+		Smalltalk globals removeKey: #CIPrepareImageDirectory].
 ] value.
 
 Smalltalk snapshot: true andQuitWithExitCode: 0.
