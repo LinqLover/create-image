@@ -11,7 +11,7 @@ You can use this action in your workflow to automatically deploy a **one-click/a
 
 ### Example workflow
 
-Below is a simple example workflow that creates an image, loads some code into it, and uploads the image bundle as a artifact of your workflow:
+Below is a simple example workflow that creates an image, loads some code into it, and uploads the image bundle as an artifact of your workflow:
 
 ```yml
 on:
@@ -62,7 +62,7 @@ MovingEyeMorph extraExampleSqueakIsWatchingYou openCenteredInWorld.
     </tr>
     <tr>
       <td><code>postpare-script</code></td>
-      <td>A script to be executed in the after saving it, i.e., in the moment the user opens it again.</td>
+      <td>A script to be executed in the image after saving it, i.e., in the moment the user opens it again.</td>
       <td><code>/path/to/script.st</code></td>
       <td><i>optional</i></td>
     </tr>
