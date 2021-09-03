@@ -14,7 +14,7 @@ branding:
 outputs:
   bundle-path:
     description: "Path to created image bundle"
-    value: ${{ steps.createImage.outputs.bundle-path }}
+    value: ${{ steps.create-image.outputs.bundle-path }}
 runs:
   using: 'composite'
   steps:
@@ -23,7 +23,7 @@ runs:
     uses: hpi-swa/setup-smalltalkCI@v1
     with:
       smalltalk-image: Squeak64-Trunk
-  - id: createImage
+  - id: create-image
     run: ${{ github.action_path }}/create_image.sh
     shell: bash
     env:
