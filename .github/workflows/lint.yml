@@ -1,0 +1,12 @@
+on:
+  push:
+    paths: ['*.md']
+  schedule: ['0 7 * * 1']
+  workflow_dispatch:
+
+jobs:
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: md-linkcheck
