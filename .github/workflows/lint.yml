@@ -14,4 +14,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: ocular-d/md-linkcheck-action
+    - uses: ocular-d/md-linkcheck-action@1
