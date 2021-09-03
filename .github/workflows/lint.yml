@@ -1,3 +1,5 @@
+name: 🧵 Lint
+
 on:
   push:
     paths: 
