@@ -12,7 +12,7 @@ fi
 script_dir="$(realpath "$(dirname "$0")")"
 cd "$script_dir"
 fileinScript="$(realpath "prepareImage.st")"
-mkdir output && cd output
+mkdir ../output && cd ../output
 
 # Download and extract latest Trunk release
 files_server="http://files.squeak.org/trunk"
@@ -28,15 +28,7 @@ echo ::set-output name=bundle-path::"$(realpath "$buildAio")"
 
 # Prepare VM execution
 cd allInOne
-# Make squeak.sh capable of passing arguments to the image
-# HACK: Modify squeak.sh because arguments are currently not available for the All-in-One bundles
-# See: https://github.com/squeak-smalltalk/squeak-app/pull/17#issuecomment-876753284
-sed -i '$s/$/ "$@"/' squeak.sh
-if [[ "$CI" == true ]]; then
-    # Add -headless flag to the VM configuration
-    # shellcheck disable=SC2016
-    sed -i 's/\(exec "${VM}"\)\( "${IMAGE}"\)/\1 -headless\2/' squeak.sh
-fi
+"$script_dir/prepare_script.sh" squeak.sh
 
 # Prepare image
 ./squeak.sh "$fileinScript" "$prepareScript" "$postpareScript"
