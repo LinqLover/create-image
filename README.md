@@ -89,6 +89,8 @@ All the silly mistakes and typos made by you in the prepare/postpare scripts wil
   </tbody>
 </table>
 
+To browse further usage examples, click [here](https://sourcegraph.com/search?q=context:global+LinqLover/create-image+file:.github/workflows&patternType=literal).
+
 ## Contribution
 
 ... is as always very welcome! If you use this action, have any ideas for improvements, or even would like to submit your patch, my issues & PRs are open!
