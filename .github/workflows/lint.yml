@@ -1,6 +1,8 @@
 on:
   push:
-    paths: ['*.md']
+    paths: 
+    - .github/workflows/lint.yml
+    - '*.md'
   schedule: ['0 7 * * 1']
   workflow_dispatch:
 
