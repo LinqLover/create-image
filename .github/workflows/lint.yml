@@ -2,9 +2,6 @@ name: 🧵 Lint
 
 on:
   push:
-    paths:
-    - .github/workflows/lint.yml
-    - '*.md'
   schedule:
     - cron: '0 7 * * 1'
   workflow_dispatch:
@@ -13,5 +10,9 @@ jobs:
   markdown:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: ocular-d/md-linkcheck-action@master
+      - uses: actions/checkout@master
+      - uses: ocular-d/md-linkcheck-action@master
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ludeeus/action-shellcheck@master
