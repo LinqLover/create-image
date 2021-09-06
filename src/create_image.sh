@@ -31,6 +31,10 @@ cd allInOne
 "$script_dir/prepare_script.sh" squeak.sh
 
 # Prepare image
+if [[ "$CI" == true ]]; then
+    VMOPTIONS="-headless"
+fi
+export VMOPTIONS
 ./squeak.sh "$fileinScript" "$prepareScript" "$postpareScript"
 
 # Clean up caches
@@ -40,5 +44,4 @@ rm -rf ./**/{{package,github}-cache/,\#tmp\#*}
 # Write changes back to zip
 zip \
     -u -r \
-    "../$buildAio" . \
-    -x squeak.sh  # See HACK above
+    "../$buildAio" .
