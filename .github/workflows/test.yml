@@ -14,5 +14,6 @@ jobs:
           prepare-script: test/prepare.st
           postpare-script: test/postpare.st
       - run: test/extract.sh "${{ steps.create-image.outputs.bundle-path }}"
-      - run: src/prepare_script.sh output/image/squeak.sh
       - run: output/image/squeak.sh "$(realpath test/test.st)"
+        env:
+          VMOPTIONS: "-headless"  # WORKAROUND: This should be passable directly to squeak.sh. See https://github.com/squeak-smalltalk/squeak-app/pull/17#issuecomment-876753284.
