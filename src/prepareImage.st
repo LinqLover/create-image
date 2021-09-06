@@ -16,6 +16,9 @@
 			Transcript showln: ('[Progress] {1}' format: {({ex messageText. ex extraParam}) joinSeparatedBy: $|}).
 			ex resume]).
 	
+	self flag: #workaround. "Usually, this would not be necessary because we download the latest build from squeak.org, but currently, builds are failing. See https://github.com/squeak-smalltalk/squeak-app/issues/20 for more information."
+	MCMcmUpdater default doUpdate: false.
+
 	prepareScriptPath := Smalltalk commandLine arguments first.
 	postpareScriptPath := Smalltalk commandLine arguments second.
 	
