@@ -12,7 +12,7 @@ fi
 script_dir="$(realpath "$(dirname "$0")")"
 cd "$script_dir"
 fileinScript="$(realpath "prepareImage.st")"
-mkdir ../output && cd ../output
+mkdir -p ../output && cd ../output
 
 # Download and extract latest Trunk release
 files_server="http://files.squeak.org/trunk"
@@ -44,3 +44,4 @@ rm -rf ./**/{{package,github}-cache/,\#tmp\#*}
 zip \
     -u -r \
     "../$buildAio" .
+# TODO optimize: Ignore *.mo files here again (-x does not work)
