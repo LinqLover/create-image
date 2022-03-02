@@ -2,7 +2,7 @@
 
 [![Tests](https://img.shields.io/github/workflow/status/LinqLover/create-image/%F0%9F%A7%AA%20Test?label=%F0%9F%A7%AA%20Test)](https://github.com/LinqLover/create-image/actions/workflows/test.yml)
 [![Lint](https://img.shields.io/github/workflow/status/LinqLover/create-image/%F0%9F%A7%B5%20Lint?label=%F0%9F%A7%B5%20Lint)](https://github.com/LinqLover/create-image/actions/workflows/lint.yml)
-[![Public workflows that use this action](https://img.shields.io/endpoint?url=https%3A%2F%2Fapi-tj-actions1.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DLinqLover%2Fcreate-image%26badge%3Dtrue)](https://sourcegraph.com/search?q=context:global+LinqLover/create-image+file:.github/workflows&patternType=literal)
+[![Public workflows that use this action](https://img.shields.io/endpoint?url=https%3A%2F%2Fused-by.vercel.app%2Fapi%2Fgithub-actions%2Fused-by%3Faction%3DLinqLover%2Fcreate-image%26badge%3Dtrue)](https://sourcegraph.com/search?q=context:global+LinqLover/create-image+file:.github/workflows&patternType=literal)
 
 > GitHub Action for creating and preparing an all-in-one image for [Squeak](https://squeak.org/).
 
