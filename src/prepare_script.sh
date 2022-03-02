@@ -1,27 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
-# HACK: Modify squeak.sh because it currently misses several features that are not available for the All-in-One bundles.
-# See: https://github.com/squeak-smalltalk/squeak-app/pull/17#issuecomment-876753284
-# Ported features:
-# - ${VMOPTIONS}
-# - detect_sound()
-# - "$@"
-# shellcheck disable=SC1004
+# HACK: Fix squeak.sh command line for running script files
+# See: https://github.com/squeak-smalltalk/squeak-app/pull/25
 # shellcheck disable=SC2016
-sed -i 's!\(exec\)\( "${VM}"\)\( "${IMAGE}"\)!\
-detect_sound() {\
-    if pulseaudio --check 2>/dev/null ; then\
-        if "${VM}" --help 2>/dev/null | grep -q vm-sound-pulse ; then\
-	    VMOPTIONS="${VMOPTIONS} -vm-sound-pulse"\
-        else\
-            VMOPTIONS="${VMOPTIONS} -vm-sound-oss"\
-            if padsp true 2>/dev/null; then\
-                SOUNDSERVER=padsp\
-            fi\
-        fi\
-    fi\
-}\
-detect_sound\
-\
-\1 ${SOUNDSERVER}\2 ${VMOPTIONS}\3 "$@"!' "$1"
+perl -0777pi -e 's!(?s)(?<=# separate vm and script arguments)\n.*?(?=(?:\r*\n){2})!\
+while [[ -n "\$1" ]] ; do\
+    case "\$1" in\
+         *.image) break;;\
+         *.st|*.cs) STARGS="\${STARGS} \$1";;\
+	 --) break;;\
+         *) VMARGS="\${VMARGS} \$1";;\
+    esac\
+    shift\
+done\
+while [[ -n "\$1" ]]; do\
+    case "\$1" in\
+         *.image) IMAGE="\$1";;\
+	 *) STARGS="\${STARGS} \$1" ;;\
+    esac\
+    shift\
+done\
+!gm' "$1"

@@ -34,8 +34,7 @@ cd allInOne
 if [[ "$CI" == true ]]; then
     VMOPTIONS="-headless"
 fi
-export VMOPTIONS
-./squeak.sh "$fileinScript" "$prepareScript" "$postpareScript"
+./squeak.sh $VMOPTIONS "$fileinScript" "$prepareScript" "$postpareScript"
 
 # Clean up caches
 shopt -s globstar
