@@ -26,11 +26,8 @@ unzip \
     -x '*.mo'  # skip superfluous localization files (optimization)
 echo ::set-output name=bundle-path::"$(realpath "$buildAio")"
 
-# Prepare VM execution
-cd allInOne
-"$script_dir/prepare_script.sh" squeak.sh
-
 # Prepare image
+cd allInOne
 if [[ "$CI" == true ]]; then
     VMOPTIONS="-headless"
 fi
