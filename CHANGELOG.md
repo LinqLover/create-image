@@ -9,3 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - Fix default FileDirectory in which the prepare script will run
+
+## [v1.2]
+
+### Fixed
+
+- Align action to breaking changes in the `./squeak.sh` invocation script
