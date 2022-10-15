@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: LinqLover/update-git-branch-action@v0.1
-      with:
-        branch: latest
-        force: 1
-        githubToken: ${{ github.token }}
+    - shell: bash
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git branch -f latest
+        git push -f origin latest
