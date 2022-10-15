@@ -1,0 +1,16 @@
+name: 🔄 Update `latest` branch
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-branch:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: Embraser01/update-git-branch-action@v1.0.0
+      with:
+        branch: latest
+        force: 1
+        githubToken: ${{ github.token }}
