@@ -16,5 +16,5 @@ jobs:
         with:
           prepare-script: test/prepare.st
           postpare-script: test/postpare.st
-      - run: test/extract.sh "${{ steps.create-image.outputs.bundle_path }}"
+      - run: test/extract.sh "${{ steps.create-image.outputs.bundle-path }}"
       - run: output/image/squeak.sh -headless "$(realpath test/test.st)"
