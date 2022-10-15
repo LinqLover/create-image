@@ -24,7 +24,7 @@ wget "$files_server/$build/$buildAio"
 unzip \
     -d allInOne/ "$buildAio" \
     -x '*.mo'  # skip superfluous localization files (optimization)
-echo "bundle_path=$(realpath "$buildAio")" >> "$GITHUB_OUTPUT"
+echo "bundle-path=$(realpath "$buildAio")" >> "$GITHUB_OUTPUT"
 
 # Prepare image
 cd allInOne
