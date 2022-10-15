@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: Embraser01/update-git-branch-action@v1.0.0
+    - uses: LinqLover/update-git-branch-action@v0.1
       with:
         branch: latest
         force: 1
