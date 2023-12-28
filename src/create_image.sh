@@ -31,14 +31,15 @@ fileinScript="$(realpath "prepareImage.st")"
 mkdir -p ../output && cd ../output
 
 # Download and extract latest Trunk release
+wgetArgs=(--progress=dot:giga)
 files_server="http://files.squeak.org/$squeakVersion"
 files_index="files.html"
-wget -O "$files_index" "$files_server"
+wget "${wgetArgs[@]}" -O "$files_index" "$files_server"
 build="$(grep -P -o "(?<=a href=\")Squeak[^<>]*?-${squeakBitness}bit(?=\/\")" "$files_index" | tail -1)"
 buildAio="$build-All-in-One.zip"
 dir="$build-All-in-One/"
-wget "$files_server/$build/$buildAio"
-unzip \
+wget "${wgetArgs[@]}" "$files_server/$build/$buildAio"
+unzip -q \
     -d "$dir" "$buildAio" \
     -x '*.mo'  # skip superfluous localization files (optimization)
 echo "bundle-path=$(realpath "$buildAio")" >> "$GITHUB_OUTPUT"

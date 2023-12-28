@@ -11,7 +11,7 @@ test -n "$1" || error "invalid archive file"
 
 extracted="$output/image"
 mkdir -p "$extracted"
-unzip "$1" -d "$extracted"
+unzip -q "$1" -d "$extracted"
 
 ls "$extracted"
 test -f "$extracted/squeak.bat"
