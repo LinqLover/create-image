@@ -62,7 +62,7 @@ MovingEyeMorph extraExampleSqueakIsWatchingYou openCenteredInWorld.
     <tr>
       <td><code>squeak-version</code></td>
       <td>The version of Squeak to be used.</td>
-      <td><code>trunk</code>, <code>6.0</code></td>
+      <td><code>trunk</code>, <code>'6.0'</code></td>
       <td><i>required</i></td>
     </tr>
     <tr>
