@@ -68,7 +68,7 @@ MovingEyeMorph extraExampleSqueakIsWatchingYou openCenteredInWorld.
     <tr>
       <td><code>squeak-bitness</code></td>
       <td>The bitness of the image to be created. Defaults to <code>64</code>.</td>
-      <td><code>64</code>, <code>32</code> (⚠ currently not supported on GitHub Actions)</td>
+      <td><code>64</code>, <code>32</code> (⚠ currently not supported on GitHub Actions, see <a href="https://github.com/actions/runner/issues/1181">actions/runner#1181</a>)</td>
       <td><i>optional</i></td>
     </tr>
     <tr>
