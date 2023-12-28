@@ -2,6 +2,22 @@
 set -eo pipefail
 
 # Read & validate inputs
+if [[ -z "$SQUEAK_VERSION" ]]; then
+    echo "SQUEAK_VERSION is not set"
+    exit 1
+fi
+squeakVersion="$SQUEAK_VERSION"
+squeakBitness=64
+if [[ "$SQUEAK_BITNESS" ]]; then
+    if [[ "$SQUEAK_BITNESS" != 32 && "$SQUEAK_BITNESS" != 64 ]]; then
+        echo "SQUEAK_BITNESS must be 32 or 64"
+        exit 1
+    fi
+    squeakBitness="$SQUEAK_BITNESS"
+fi
+if [[ "$squeakBitness" == 32 ]]; then
+    echo "WARNING: 32bit may not be supported on GitHub Actions"
+fi
 if [[ "$PREPARE_SCRIPT" ]]; then
     prepareScript="$(realpath "$PREPARE_SCRIPT")"
 fi
@@ -15,19 +31,21 @@ fileinScript="$(realpath "prepareImage.st")"
 mkdir -p ../output && cd ../output
 
 # Download and extract latest Trunk release
-files_server="http://files.squeak.org/trunk"
+wgetArgs=(--progress=dot:giga)
+files_server="http://files.squeak.org/$squeakVersion"
 files_index="files.html"
-wget -O "$files_index" "$files_server"
-build="$(grep -P -o '(?<=a href=")Squeak[^<>]*?-64bit(?=\/")' "$files_index" | tail -1)"
+wget "${wgetArgs[@]}" -O "$files_index" "$files_server"
+build="$(grep -P -o "(?<=a href=\")Squeak[^<>]*?-${squeakBitness}bit(?=\/\")" "$files_index" | tail -1)"
 buildAio="$build-All-in-One.zip"
-wget "$files_server/$build/$buildAio"
-unzip \
-    -d allInOne/ "$buildAio" \
+dir="$build-All-in-One/"
+wget "${wgetArgs[@]}" "$files_server/$build/$buildAio"
+unzip -q \
+    -d "$dir" "$buildAio" \
     -x '*.mo'  # skip superfluous localization files (optimization)
 echo "bundle-path=$(realpath "$buildAio")" >> "$GITHUB_OUTPUT"
 
 # Prepare image
-cd allInOne
+cd "$dir"
 if [[ "$CI" == true ]]; then
     VMOPTIONS="-headless"
 fi
@@ -42,3 +60,7 @@ zip \
     -u -r \
     "../$buildAio" .
 # TODO optimize: Ignore *.mo files here again (-x does not work)
+
+# Remove temporary files
+cd ..
+rm -rf "$dir"

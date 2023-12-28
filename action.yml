@@ -1,6 +1,13 @@
 name: "Create Image"
 description: "Create and prepare a customized Squeak all-in-one image for the latest Trunk version of Squeak"
 inputs:
+  squeak-version:
+    description: "The version of Squeak to be used"
+    required: true
+  squeak-bitness:
+    description: "The bitness of the image to be created"
+    required: false
+    default: "64"
   prepare-script:
     description: "Path to `.st` file that will be executed before saving the image"
     required: false
@@ -27,5 +34,7 @@ runs:
     run: ${{ github.action_path }}/src/create_image.sh
     shell: bash
     env:
+      SQUEAK_VERSION: ${{ inputs.squeak-version }}
+      SQUEAK_BITNESS: ${{ inputs.squeak-bitness }}
       PREPARE_SCRIPT: ${{ inputs.prepare-script }}
       POSTPARE_SCRIPT: ${{ inputs.postpare-script }}

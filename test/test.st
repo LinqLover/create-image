@@ -1,3 +1,4 @@
+| arguments expectedVersion systemVersion actualVersion |
 "Make sure to handle errors properly"
 TranscriptStream redirectToStdOut: true.
 thisContext insertSender: (Context contextOn: UnhandledError, ProvideAnswerNotification do: [:ex |
@@ -23,6 +24,23 @@ self
 	assert: (Smalltalk globals hasBindingOf: #CIPrepareImageTestTesting) not
 	description: 'test: image has already been tested'.
 Smalltalk globals at: #CIPrepareImageTestPostpared put: DateAndTime now.
+
+arguments := Smalltalk arguments.
+arguments first = '--' ifTrue: [arguments := arguments allButFirst]. "<= Squeak 5.3"
+expectedVersion := arguments first.
+systemVersion := SystemVersion current.
+actualVersion :=systemVersion isAlpha
+	ifTrue: ['trunk']
+	ifFalse: ['{1}.{2}' format: {systemVersion majorVersionNumber. systemVersion minorVersionNumber}].
+self
+	assert: actualVersion = expectedVersion
+	description: ('test: image version is {1} but expected {2}' format: {actualVersion. expectedVersion}).
+
+expectedBitness := arguments second asNumber.
+actualBitness := Smalltalk image wordSize * 8.
+self
+	assert: actualBitness = expectedBitness
+	description: ('test: image bitness is {1} but expected {2}' format: {actualBitness. expectedBitness}).
 
 Transcript showln: 'All tests passed!!'.
 Smalltalk snapshot: false andQuit: true.
