@@ -79,7 +79,7 @@ MovingEyeMorph extraExampleSqueakIsWatchingYou openCenteredInWorld.
     </tr>
     <tr>
       <td><code>postpare-script</code></td>
-      <td>A script to be executed in the image after saving it, i.e., in the moment the user opens it again.</td>
+      <td>A script to be executed in the image after saving it, i.e., at the moment the user opens it again.</td>
       <td><code>/path/to/script.st</code></td>
       <td><i>optional</i></td>
     </tr>
