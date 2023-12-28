@@ -59,3 +59,7 @@ zip \
     -u -r \
     "../$buildAio" .
 # TODO optimize: Ignore *.mo files here again (-x does not work)
+
+# Remove temporary files
+cd ..
+rm -rf "$dir"
