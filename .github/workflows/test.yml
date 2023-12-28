@@ -9,6 +9,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        squeak-version: ['trunk', '6.0', '5.3']
+        squeak-bitness: [64]  # GitHub Actions only supports 64-bit Ubuntu https://github.com/actions/runner/issues/1181
     steps:
       - uses: actions/checkout@v2
       - uses: ./
@@ -16,5 +20,7 @@ jobs:
         with:
           prepare-script: test/prepare.st
           postpare-script: test/postpare.st
+          squeak-version: ${{ matrix.squeak-version }}
+          squeak-bitness: ${{ matrix.squeak-bitness }}
       - run: test/extract.sh "${{ steps.create-image.outputs.bundle-path }}"
-      - run: output/image/squeak.sh -headless "$(realpath test/test.st)"
+      - run: output/image/squeak.sh -headless "$(realpath test/test.st)" -- ${{ matrix.squeak-version }} ${{ matrix.squeak-bitness }}

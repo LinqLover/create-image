@@ -8,8 +8,8 @@
 
 You can use this action in your workflow to automatically deploy a **one-click/all-in-one image bundle of Squeak** containing **your app or modifications.**
 - The bundle is fetched from <https://squeak.org/downloads> and will contain a **ready-to-use image** and **VM binaries** for all supported platforms (head over to [squeak-smalltalk/squeak-app](https://github.com/squeak-smalltalk/squeak-app) for more information).
-- Currently, **only the latest version** of the Squeak [Trunk](http://source.squeak.org/trunk) is supported.
-- Currently, only 64-bit binaries are supported.
+- You can run **custom scripts** to **prepare** the image before saving it or to **postpare** it when it is opened again.
+- You can choose the **Squeak version** and **bitness** of the image.
 
 ## Usage
 
@@ -30,6 +30,7 @@ jobs:
       - uses: LinqLover/create-image@latest
         id: create-image
         with:
+          squeak-version: 6.0
           prepare-script: ./scripts/prepareImage.st
       - uses: actions/upload-artifact@master
         with:
@@ -58,6 +59,18 @@ MovingEyeMorph extraExampleSqueakIsWatchingYou openCenteredInWorld.
       <td>Required?</td>
     </tr>
   <tbody>
+    <tr>
+      <td><code>squeak-version</code></td>
+      <td>The version of Squeak to be used.</td>
+      <td><code>trunk</code>, <code>6.0</code></td>
+      <td><i>required</i></td>
+    </tr>
+    <tr>
+      <td><code>squeak-bitness</code></td>
+      <td>The bitness of the image to be created. Defaults to <code>64</code>.</td>
+      <td><code>64</code>, <code>32</code> (⚠ currently not supported on GitHub Actions)</td>
+      <td><i>optional</i></td>
+    </tr>
     <tr>
       <td><code>prepare-script</code></td>
       <td>A script to be filed into the image before saving it.</td>
