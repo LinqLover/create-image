@@ -15,3 +15,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - Align action to breaking changes in the `./squeak.sh` invocation script
+
+## [v2.0]
+
+### Added
+
+- Add support for configuring Squeak version and bitness
+- Reduce noise on action log
