@@ -34,5 +34,7 @@ runs:
     run: ${{ github.action_path }}/src/create_image.sh
     shell: bash
     env:
+      SQUEAK_VERSION: ${{ inputs.squeak-version }}
+      SQUEAK_BITNESS: ${{ inputs.squeak-bitness }}
       PREPARE_SCRIPT: ${{ inputs.prepare-script }}
       POSTPARE_SCRIPT: ${{ inputs.postpare-script }}
