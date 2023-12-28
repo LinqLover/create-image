@@ -1,5 +1,5 @@
 name: "Create Image"
-description: "Create and prepare a customized Squeak all-in-one image for the latest Trunk version of Squeak"
+description: "Create and prepare a customized Squeak all-in-one image"
 inputs:
   squeak-version:
     description: "The version of Squeak to be used"
