@@ -30,7 +30,7 @@ jobs:
       - uses: LinqLover/create-image@latest
         id: create-image
         with:
-          squeak-version: 6.0
+          squeak-version: '6.0'
           prepare-script: ./scripts/prepareImage.st
       - uses: actions/upload-artifact@master
         with:
